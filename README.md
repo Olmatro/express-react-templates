@@ -38,7 +38,7 @@ import * as React from 'react'
 
 export default async () => {
   await incrementCounter()
-  await getCounterValue()
+  const numberOfVisitors = await getCounterValue()
   return (
     <div>{ numberOfVisitors } have visited this website!</div>
   )
