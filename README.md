@@ -37,11 +37,12 @@ Now let's do some *crazy* stuff with an api.
 import { incrementCounter, getCounterValue } from './some-db-functions'
 import * as React from 'react'
 
-export default async () => {
+export default async ({ req }) => {
+  const { name } = req.query
   await incrementCounter()
   const numberOfVisitors = await getCounterValue()
   return (
-    <div>{ numberOfVisitors } have visited this website!</div>
+    <div>{ numberOfVisitors } have visited this website! Thanks for coming {name}!</div>
   )
 }
 ```
