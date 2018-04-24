@@ -18,5 +18,29 @@ Visit `localhost:3003` in your browser.
 ## Creating Routes
 
 Just place a JS file in the `pages` directory. It'll automatically be picked up
-on the server. The name of the file becomes the route, e.g. `src/pages/salsa.js`
-is visible at `http://localhost:3003/salsa`.
+on the server. The name of the file becomes the route, e.g. `src/pages/somepage.js`
+is visible at `http://localhost:3003/somepage`.
+
+Here's an example route file:
+```javascript
+// somepage.js
+import * as React from 'react'
+
+export default () => <div>'hello world'</div>
+```
+
+Now let's do some *crazy* stuff with an api.
+
+```javascript
+// somepage.js
+import { incrementCounter, getCounterValue } from './some-db-functions'
+import * as React from 'react'
+
+export default async () => {
+  await incrementCounter()
+  await getCounterValue()
+  return (
+    <div>{ numberOfVisitors } have visited this website!</div>
+  )
+}
+```
