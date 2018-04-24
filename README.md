@@ -1,4 +1,4 @@
-# Express React Templates
+# Express Server with React Templates
 
 This is a **very simple** way to create a ui with api bindings built in.
 
