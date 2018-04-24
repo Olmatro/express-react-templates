@@ -4,7 +4,7 @@ This is a **very simple** way to create a ui with api bindings built in.
 
 Opinions:
 * React as templating language
-* Express with sensible defaults and middleware for file uploads
+* Express with sensible defaults and middleware for file uploads, json body parsing, form parsing etc.
 * Next.js (and PHP) inspired "place a file in a directory and it just works"
 
 ## Usage
