@@ -5,7 +5,6 @@ import fileUpload from 'express-fileupload'
 import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
 import morgan from 'morgan'
-import getDB from 'database'
 import path from 'path'
 import ReactDOM from 'react-dom/server'
 import htmlTemplate from './html-template'
@@ -22,9 +21,9 @@ class HTTPAPI {
   db: any
   app: any
 
-  init = async (dbConfig?: { seed?: boolean, testMode?: boolean }) => {
+  init = async () => {
     console.log('initing http api...')
-    this.db = await getDB(dbConfig)
+//     this.db = await getDB(dbConfig)
     this.app = express()
     this._configureMiddleware()
     await this._configureRoutes()
