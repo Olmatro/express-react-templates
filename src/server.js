@@ -8,6 +8,7 @@ import morgan from 'morgan'
 import path from 'path'
 import ReactDOM from 'react-dom/server'
 import htmlTemplate from './html-template'
+import { isValidElement } from 'react'
 
 const importAll = r =>
   r.keys().reduce((acc, k) => {
@@ -47,13 +48,19 @@ class HTTPAPI {
     console.log('configuring routes...')
     for (const [route, componentFunc] of Object.entries(routeMap)) {
       this.app.get(`/${route}`, async (req, res) => {
-        res.send(
-          htmlTemplate({
-            body: ReactDOM.renderToString(
-              await componentFunc({ req, res, db: this.db })
-            )
-          })
-        )
+        const renderedComponent = await componentFunc({ req, res, db: this.db })
+        
+        if (isValidElement(renderedComponent)) {
+          res.send(
+            htmlTemplate({
+              body: ReactDOM.renderToString(
+                renderedComponent
+              )
+            })
+          )
+        } else {
+          res.json(renderedComponent) 
+        }
       })
     }
     this.app.get('*', async (req, res) => {
