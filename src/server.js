@@ -12,7 +12,7 @@ import { isValidElement } from 'react'
 
 const importAll = r =>
   r.keys().reduce((acc, k) => {
-    const routeName = k.replace(/^\.\//, '').replace('.page.js', '')
+    const routeName = k.replace(/^\.\//, '').replace('index.page.js', '').replace('.page.js', '')
     acc[routeName] = r(k).default
     return acc
   }, {})
