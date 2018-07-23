@@ -12,11 +12,11 @@ import { isValidElement } from 'react'
 
 const importAll = r =>
   r.keys().reduce((acc, k) => {
-    const routeName = k.replace(/^\.\//, '').replace('.js', '')
+    const routeName = k.replace(/^\.\//, '').replace('.page.js', '')
     acc[routeName] = r(k).default
     return acc
   }, {})
-const routeMap = importAll(require.context('./pages', true, /\.js$/))
+const routeMap = importAll(require.context('./pages', true, /\.page\.js$/))
 
 class HTTPAPI {
   db: any
@@ -24,7 +24,7 @@ class HTTPAPI {
 
   init = async () => {
     console.log('initing http api...')
-//     this.db = await getDB(dbConfig)
+    //     this.db = await getDB(dbConfig)
     this.app = express()
     this._configureMiddleware()
     await this._configureRoutes()
@@ -49,17 +49,15 @@ class HTTPAPI {
     for (const [route, componentFunc] of Object.entries(routeMap)) {
       this.app.get(`/${route}`, async (req, res) => {
         const renderedComponent = await componentFunc({ req, res, db: this.db })
-        
+
         if (isValidElement(renderedComponent)) {
           res.send(
             htmlTemplate({
-              body: ReactDOM.renderToString(
-                renderedComponent
-              )
+              body: ReactDOM.renderToString(renderedComponent)
             })
           )
         } else {
-          res.json(renderedComponent) 
+          res.json(renderedComponent)
         }
       })
     }
