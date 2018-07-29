@@ -24,7 +24,7 @@ is visible at `http://localhost:3003/somepage`.
 
 Here's an example route file:
 ```javascript
-// somepage.js
+// pages/somepage.page.js
 import * as React from 'react'
 
 export default () => <div>'hello world'</div>
@@ -33,7 +33,7 @@ export default () => <div>'hello world'</div>
 Now let's do some *crazy* stuff with an api.
 
 ```javascript
-// somepage.js
+// pages/somepage.page.js
 import { incrementCounter, getCounterValue } from './some-db-functions'
 import * as React from 'react'
 
@@ -44,5 +44,19 @@ export default async ({ req }) => {
   return (
     <div>{ numberOfVisitors } have visited this website! Thanks for coming {name}!</div>
   )
+}
+```
+
+You can also return JSON (e.g. for an API endpoint)
+
+```javascript
+// pages/somepage.page.js
+import { incrementCounter, getCounterValue } from './some-db-functions'
+
+export default async ({ req }) => {
+  const { name } = req.query
+  await incrementCounter()
+  const numberOfVisitors = await getCounterValue()
+  return { numberOfVisitors }
 }
 ```
