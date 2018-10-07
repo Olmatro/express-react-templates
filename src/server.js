@@ -47,17 +47,21 @@ class HTTPAPI {
   _configureRoutes = async () => {
     console.log('configuring routes...')
     for (const [route, componentFunc] of Object.entries(routeMap)) {
-      this.app.get(`/${route}`, async (req, res) => {
-        const renderedComponent = await componentFunc({ req, res, db: this.db })
+      this.app.all(`/${route}`, async (req, res) => {
+        try {
+          const renderedComponent = await componentFunc({ req, res, db: this.db })
 
-        if (isValidElement(renderedComponent)) {
-          res.send(
-            htmlTemplate({
-              body: ReactDOM.renderToString(renderedComponent)
-            })
-          )
-        } else {
-          res.json(renderedComponent)
+          if (isValidElement(renderedComponent)) {
+            res.send(
+              htmlTemplate({
+                body: ReactDOM.renderToString(renderedComponent)
+              })
+            )
+          } else {
+            res.json(renderedComponent)
+          }
+        } catch (e) {
+          res.status(500).json({ success: false, message: e.toString() })
         }
       })
     }
