@@ -18,8 +18,19 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             babelrc: false,
-            presets: ['stage-0'],
-            plugins: ['transform-flow-strip-types', 'transform-react-jsx']
+            presets: [
+              [
+                '@babel/env',
+                {
+                  targets: { node: 'current' }
+                }
+              ]
+            ],
+            plugins: [
+              '@babel/plugin-transform-flow-strip-types',
+              '@babel/plugin-proposal-class-properties',
+              '@babel/plugin-transform-react-jsx'
+            ]
           }
         }
       }
