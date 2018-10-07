@@ -8,23 +8,29 @@
     "start:watch": "nodemon --exec \"npm run start\" --watch src"
   },
   "dependencies": {
-    "body-parser": "^1.18.2",
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.3",
     "cookie-parser": "^1.4.3",
     "express": "^4.16.3",
-    "express-fileupload": "^0.4.0",
-    "knex": "^0.14.6",
-    "morgan": "^1.9.0",
-    "path": "^0.12.7",
-    "pg": "^7.4.1",
-    "react": "^16.3.2",
-    "react-dom": "^16.3.2"
+    "express-fileupload": "^1.0.0-alpha.1",
+    "knex": "^0.15.2",
+    "morgan": "^1.9.1",
+    "pg": "^7.5.0",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2"
   },
   "devDependencies": {
-    "babel-loader": "^7.1.4",
-    "babel-plugin-transform-react-jsx": "^6.24.1",
-    "babel-preset-stage-0": "^6.24.1",
-    "nodemon": "^1.17.3",
-    "webpack-cli": "^2.0.15",
+    "@babel/core": "^7.1.2",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/plugin-transform-flow-strip-types": "^7.0.0",
+    "@babel/plugin-transform-react-jsx": "^7.0.0",
+    "@babel/plugin-transform-regenerator": "^7.0.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/preset-stage-0": "^7.0.0",
+    "babel-loader": "^8.0.4",
+    "nodemon": "^1.18.4",
+    "webpack-cli": "^3.1.2",
     "webpack-node-externals": "^1.7.2"
   }
 }
