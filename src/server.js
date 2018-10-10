@@ -21,6 +21,7 @@ const routeMap = importAll(require.context('./pages', true, /\.page\.js$/))
 class HTTPAPI {
   db: any
   app: any
+  server: any
 
   init = async () => {
     console.log('initing http api...')
@@ -29,11 +30,18 @@ class HTTPAPI {
     this._configureMiddleware()
     await this._configureRoutes()
     await new Promise(resolve => {
-      this.app.listen(3003, () => {
+      server = this.app.listen(3003, () => {
         console.log('HTTP API Started on 3003')
         resolve()
       })
     })
+  }
+  
+  destroy = async () => {
+    if (server) {
+      server.close()
+      server = null
+    }
   }
 
   _configureMiddleware = () => {
