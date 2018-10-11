@@ -13,7 +13,9 @@ import { isValidElement } from 'react'
 const importAll = r =>
   r.keys().reduce((acc, k) => {
     const routeName = k.replace(/^\.\//, '').replace('index.page.js', '').replace('.page.js', '')
-    acc[routeName] = r(k).default
+    const module = r(k)
+    acc[module.routeName ? module.routeName.replace(/^\//, '') : routeName] =
+      module.default
     return acc
   }, {})
 const routeMap = importAll(require.context('./pages', true, /\.page\.js$/))
